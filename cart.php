@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <!-- belle/cart-variant1.html   11 Nov 2019 12:44:31 GMT -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
