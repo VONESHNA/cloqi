@@ -524,7 +524,7 @@ public static function getWishId($data){
 
         public static function getBillingDetail($con){
             $tbl=self::$ordertbl;
-            $q="SELECT  members.fullname AS username, members.email AS useremail, bill.* FROM `bill`  JOIN members ON bill.customer=members.id  ORDER BY bill.billtoken DESC";
+            $q="SELECT members.id AS userID, members.fullname AS username, members.email AS useremail, bill.* FROM `bill`  JOIN members ON bill.customer=members.id  ORDER BY bill.billtoken DESC";
             $qr=mysqli_query($con,$q);
             $n=mysqli_num_rows($qr);
             if($n>0)
@@ -543,7 +543,7 @@ public static function getWishId($data){
             $con=$data['con'];
             $billtoken=$data['billtoken'];
             $tbl=self::$ordertbl;
-            $q="SELECT   product.name AS productname, product.sellingprice AS sellingprice,  category.name AS categoryname, order.size AS size, order.quantity AS quantity, bill.* FROM `order` JOIN `bill` ON order.billtoken=bill.billtoken JOIN product ON order.product=product.id JOIN category ON product.category=category.id ORDER BY order.billtoken DESC";
+            $q="SELECT   product.name AS productname, product.sellingprice AS sellingprice,  category.name AS categoryname, order.customer AS customer, order.size AS size, order.quantity AS quantity, bill.* FROM `order` JOIN `bill` ON order.billtoken=bill.billtoken JOIN product ON order.product=product.id JOIN category ON product.category=category.id ORDER BY order.billtoken DESC";
             $qr=mysqli_query($con,$q);
             $n=mysqli_num_rows($qr);
             if($n>0)

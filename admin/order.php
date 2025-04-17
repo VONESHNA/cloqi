@@ -85,6 +85,8 @@ $getorders['n']>0?$orders=$getorders['f']:$orders=[];
                             $billingDetailsfn['n']>0?$billingDetails=$billingDetailsfn['f']:$billingDetails=[];
                             foreach($billingDetails AS $k=>$v){
                                 $created=date('d-M-Y',strtotime($v['created']));
+                                $userid=$v['userID'];
+                                $customer=$v['customer'];
                                 $username=$v['username'];
                                 $useremail=$v['useremail'];
                                 $fullname=$v['firstname'].$v['lastname'];
@@ -158,15 +160,18 @@ $getorders['n']>0?$orders=$getorders['f']:$orders=[];
                                 $ordersfn=Dbops::getOrdersByBillToken($data);
                                 $ordersfn['n']>0?$orders=$ordersfn['f']:$orders=[];
                                     foreach($orders AS $k=>$v){
+                                    $customer=$v['customer'];
+                                    if($userid==$customer){
                                     $product=$v['productname'];
                                     $category=$v['categoryname'];
                                     $sellingprice=$v['sellingprice'];
                                     $quantity=$v['quantity'];
                                     $totalprice+=$quantity*$sellingprice;
                                     $size=$v['size'];
+                                    
                                 ?>
                                     <tr>
-                                        <td><p><br/><?php echo ++$j; ?></p></td>
+                                        <td><p><br/><?php  echo ++$j; ?></p></td>
                                         <td ><p style="padding-top:15px;";><?php echo $product;?>&nbsp;&nbsp;</p></td>
                                         <td><?php echo $size;?></td>
                                         <td><?php echo $category;?></td>
@@ -176,7 +181,7 @@ $getorders['n']>0?$orders=$getorders['f']:$orders=[];
 
 
                                     </tr>
-                                    <?php } ?>
+                                    <?php } }?>
                                 </tbody>
                                 <tfoot><tr><td colspan='2'></td><td colspan='3'><p class="text-success">Total Billing Amount :</p> </td><td><p class='text-success'>&#8377;<?php echo $totalprice;?></p></td></tr></tfoot>
                                 </table>
